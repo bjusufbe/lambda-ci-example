@@ -1,0 +1,26 @@
+{
+  "name": "@dtk/lambda-ci-example",
+  "version": "1.0.0",
+  "description": "Minimal aws lambda function used for setup of CI process",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bjusufbe/lambda-ci-example.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bjusufbe/lambda-ci-example/issues"
+  },
+  "homepage": "https://github.com/bjusufbe/lambda-ci-example#readme",
+  "devDependencies": {
+    "@types/node": "^14.11.2"
+  }
+}
