@@ -77,8 +77,7 @@ If the function doesn't exist already on the AWS Lambda, we can create it in fol
 ```
 $ aws lambda --region <REGION> create-function --function-name lambda-ci-example --runtime nodejs12.x --role arn:aws:iam::************:role/ci-simple-exec-role --handler index.handler --zip-file fileb://dist/lambda-ci-example.zip
 ```
-The handler is the method in your Lambda function that processes events. Important thing to note here is that name of the handler is in format: <index.js_file_name_without_js_suffix>.<method_name_which_processes_event>. Therefore, in our case, that is: **index.handler**
-Also, index.js file (handler) needs to exist in the root of the project. 
+The handler is the method in your Lambda function that processes events. Important thing to note here is that name of the handler is in format: **<index.js_file_name_without_js_suffix>.<method_name_which_processes_event>**. Therefore, in our case, that is: **index.handler**. Also, index.js file (handler) needs to exist in the root of the project. 
 
 If the function exists already, we can updated it in following way:
 ```
