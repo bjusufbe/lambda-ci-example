@@ -1,4 +1,4 @@
-import { UserData } from "../lib/userData";
+import { UserData } from "./lib/userData";
 
 export const handler = async (event: any = {}): Promise<any> => {
     let userData = new UserData(event.firstName, event.lastName, event.age);
