@@ -23,7 +23,7 @@ if [[ ${FUNCTION_NAME} == "" || ${DEPLOYMENT_PACKAGE} == "" || ${REGION} == "" ]
 fi
 
 RESULT=""
-if [[ ${MODE} != "create" || ${MODE} != "update" ]]; then
+if [[ ${MODE} != "create" && ${MODE} != "update" ]]; then
     die "[ERROR] Please specify correct mode (create or update). Aborting the execution..."
 else
     if [[ ${MODE} == "create" ]]; then
@@ -37,7 +37,7 @@ else
     fi
 fi
 
-if [[ ${RESULT} == "Successful" ]]; then
+if [[ ${RESULT} == '"Successful"' ]]; then
     echo "AWS lambda function ${FUNCTION_NAME} has been created/updated successfully!"
 else
     echo "Error when creating/updating lambda function: ${FUNCTION_NAME}!"

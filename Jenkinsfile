@@ -39,7 +39,7 @@ pipeline {
       steps {
         script {
           sh "chmod +x ./deploy/invoke_lambda_function.sh"
-          env.RESULT = sh(script:'./deploy/invoke_lambda_function.sh -f ${FUNCTION_NAME} -r ${REGION} -p ${PAYLOAD}', returnStdout: true).trim()
+          env.RESULT = sh(script:'./deploy/invoke_lambda_function.sh -f ${FUNCTION_NAME} -r ${REGION} -p "${PAYLOAD}"', returnStdout: true).trim()
           if (env.RESULT.contains("AWS lambda function ${FUNCTION_NAME} has been executed successfully!")) {
             sh 'exit 0'
           } else {
