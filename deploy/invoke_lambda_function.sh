@@ -21,11 +21,11 @@ if [[ ${FUNCTION_NAME} == "" || ${REGION} == "" || ${PAYLOAD} == "" ]]; then
     die "[ERROR] One or more required input values (FUNCTION_NAME, REGION, PAYLOAD) are not passed as arguments to this script. Aborting the execution..."
 else
     RESULT=`aws lambda invoke --region ${REGION} --function-name ${FUNCTION_NAME} --payload "${PAYLOAD}" output.json`
-    cat output.json
+    OUTPUT=`cat output.json`
 fi
 
 if [[ ${RESULT} == *"200"* ]]; then
-    echo -e "AWS lambda function ${FUNCTION_NAME} has been executed successfully!"
+    echo -e "AWS lambda function ${FUNCTION_NAME} has been executed successfully! | RESULT: ${OUTPUT}"
 else
     echo "Error when executing lambda function: ${FUNCTION_NAME}!"
 fi
