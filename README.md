@@ -7,12 +7,13 @@ This is a typescript example project which shows set of steps (needed for CI pro
 ### Setup of IAM roles and permissions:
 Before going into details on how to create actual AWS Lambda function, we need to do necessary IAM setup. That means following:
 
-#### Making sure that there is an AWS Lambda Execution role created, which will be used for the actual AWS Lambda function
+#### Create Lambda execution IAM role
 
-1. Create IAM role **ci-simple-exec-role** which has predefined policy called **AWSLambdaBasicExecutionRole** attached. This policy provides write permissions to CloudWatch logs. This is fine for this minimal setup but we can obviously add more sophisticated set of 
-policies that will be needed for the actual AWS Lambda function (depending on its interaction with other AWS services)
+Lambda function's execution role grants it permission to access AWS services and resources. Create IAM role **ci-simple-exec-role** which has predefined policy called **AWSLambdaBasicExecutionRole** attached. This policy provides write permissions to CloudWatch logs. This is fine for this minimal setup but we can obviously add more sophisticated set of policies that will be needed for the actual AWS Lambda function (depending on its interaction with other AWS services)
 
-#### Making sure that CI node, which will be running CI job to deploy lambda function has appopriate IAM role attached
+#### Attach appropriate IAM role to CI node
+
+CI node, on which this setup will be running, needs to have specific permissions for creating/updating/invoking lambda function. Therefore, following steps need to be done:
 
 1. Create IAM policy called **ci-lambda-access** which looks like this:
 ```
@@ -66,7 +67,7 @@ $ tree
 
 ### Create deployment package and create/update lambda function
 
-Now that we have code transpiled, we can create a deployment package in following way:
+Now that we have code transpiled, we can create a deployment package (zip file which contains code and its dependencies) in following way:
 ```
 $ cd ./dist
 ./dist $ zip -r lambda-ci-example.zip .
@@ -76,6 +77,7 @@ If the function doesn't exist already on the AWS Lambda, we can create it in fol
 ```
 $ aws lambda --region <REGION> create-function --function-name lambda-ci-example --runtime nodejs12.x --role arn:aws:iam::************:role/ci-simple-exec-role --handler index.handler --zip-file fileb://dist/lambda-ci-example.zip
 ```
+The handler is the method in your Lambda function that processes events. Important thing to note here is that name of the handler is in format: **<index.js_file_name_without_js_suffix>.<method_name_which_processes_event>**. Therefore, in our case, that is: **index.handler**. Also, index.js file (handler) needs to exist in the root of the project. 
 
 If the function exists already, we can updated it in following way:
 ```
