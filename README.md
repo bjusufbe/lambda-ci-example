@@ -70,8 +70,10 @@ $ tree
 Now that we have code transpiled, we can create a deployment package (zip file which contains code and its dependencies) in following way:
 ```
 $ cd ./dist
+./dist $ cp -r ../node_modules .
 ./dist $ zip -r lambda-ci-example.zip .
 ```
+It is important to copy node_modules directory which is where all dependencies are located.
 
 If the function doesn't exist already on the AWS Lambda, we can create it in following way:
 ```
