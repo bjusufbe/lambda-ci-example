@@ -20,7 +20,6 @@ fi
 
 npm install -g typescript
 npm install
-npm install -g ts-node
 tsc
 
 cp -r ./node_modules ${DEPLOYMENT_PACKAGE_PATH}/
