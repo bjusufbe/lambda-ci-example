@@ -24,7 +24,7 @@ else
     OUTPUT=`cat output.json`
 fi
 
-if [[ ${RESULT} ~= "200" ]]; then
+if [[ ${RESULT} == *"200"* ]]; then
     echo -e "AWS lambda function ${FUNCTION_NAME} has been executed successfully!\n  \n${OUTPUT}"
 else
     echo "Error when executing lambda function: ${FUNCTION_NAME}!"
