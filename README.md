@@ -17,7 +17,7 @@ CI node, on which this setup will be running, needs to have specific permissions
 
 1. Create IAM policy called **ci-lambda-access** which looks like this:
 ```
-   {
+{
     "Version": "2012-10-17",
     "Statement": [
         {
@@ -32,11 +32,16 @@ CI node, on which this setup will be running, needs to have specific permissions
                 "lambda:UpdateFunctionConfiguration",
                 "lambda:GetFunctionConfiguration",
                 "lambda:PublishVersion",
+                "lambda:PublishLayerVersion",
+                "lambda:GetLayerVersion",
                 "iam:PassRole"
             ],
             "Resource": [
                 "*",
-                "arn:aws:iam::************:role/ci-simple-exec-role"
+                "arn:aws:lambda:*:*:function:*",
+                "arn:aws:lambda:*:*:layer:*",
+                "arn:aws:lambda:*:*:layer:*:*",
+                "arn:aws:iam::864627408630:role/dtk-ci-simple-exec-role"
             ]
         }
     ]
